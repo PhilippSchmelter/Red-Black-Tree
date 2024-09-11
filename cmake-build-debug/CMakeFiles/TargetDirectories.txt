@@ -1,0 +1,5 @@
+C:/Users/Philipp/CLionProjects/RBTree/cmake-build-debug/CMakeFiles/RBTreeMain.dir
+C:/Users/Philipp/CLionProjects/RBTree/cmake-build-debug/CMakeFiles/RBTreeTest.dir
+C:/Users/Philipp/CLionProjects/RBTree/cmake-build-debug/CMakeFiles/test.dir
+C:/Users/Philipp/CLionProjects/RBTree/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Philipp/CLionProjects/RBTree/cmake-build-debug/CMakeFiles/rebuild_cache.dir
