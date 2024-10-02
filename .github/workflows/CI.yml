@@ -12,7 +12,8 @@ jobs:
   build:
 
     runs-on: self-hosted
-
+    container:
+      image: gcc:10 
     steps:
       # Schritt 1: Repository auschecken
       - name: Checkout code
