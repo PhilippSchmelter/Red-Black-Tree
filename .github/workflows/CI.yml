@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+      # Schritt 1: Repository auschecken
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Schritt 2: Installiere Abhängigkeiten
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ make
+
+      # Schritt 3: Erstelle ein Build-Verzeichnis und baue das Projekt
+      - name: Build project
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+
+      # Schritt 4: Führe die Tests aus
+      - name: Run tests
+        run: |
+          cd build
+          ctest --output-on-failure
