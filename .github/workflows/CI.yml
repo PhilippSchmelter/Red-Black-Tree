@@ -19,10 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Schritt 2: Installiere Abhängigkeiten
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake g++ make
-
       # Schritt 3: Erstelle ein Build-Verzeichnis und baue das Projekt
       - name: Build project
         run: |
