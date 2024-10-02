@@ -20,7 +20,7 @@ jobs:
 
       # Schritt 2: Installiere Abhängigkeiten
       - name: Install dependencies
-        run: echo "DanaStinkt22" | sudo apt-get update && sudo apt-get install -y cmake g++ make
+        run: echo "MythicalPull22" | sudo -S apt-get update && sudo apt-get install -y cmake g++ make
 
       # Schritt 3: Erstelle ein Build-Verzeichnis und baue das Projekt
       - name: Build project
