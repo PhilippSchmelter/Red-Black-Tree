@@ -10,25 +10,28 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    container:
-      image: gcc:10 
+
     steps:
-      # Schritt 1: Repository auschecken
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # Schritt 3: Erstelle ein Build-Verzeichnis und baue das Projekt
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake ..
-          make
+    - name: Set up CMake
+      uses: lukka/get-cmake@v3
 
-      # Schritt 4: Führe die Tests aus
-      - name: Run tests
-        run: |
-          cd build
-          ctest --output-on-failure
+    - name: Set up C++ compiler
+      uses: actions/setup-cpp@v2
+      with:
+        compiler: gcc
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Configure with CMake
+      run: cmake -S . -B build
+
+    - name: Build with CMake
+      run: cmake --build build
+
+    - name: Run tests
+      run: ctest --test-dir build
