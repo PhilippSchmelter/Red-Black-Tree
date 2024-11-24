@@ -1,4 +1,4 @@
-name: CI
+name: Build/Test
 
 on:
   push:
@@ -9,29 +9,60 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3
 
-    - name: Set up CMake
-      uses: lukka/get-cmake@v3
-
-    - name: Set up C++ compiler
+    - name: Set up C++ Compiler
       uses: actions/setup-cpp@v2
       with:
         compiler: gcc
+        cpp-version: 20
 
-    - name: Create build directory
-      run: mkdir build
+    - name: Install CMake
+      uses: jwlawson/actions-setup-cmake@v1
+      with:
+        cmake-version: '3.16.0'
 
-    - name: Configure with CMake
+    - name: Configure Build with CMake
       run: cmake -S . -B build
 
-    - name: Build with CMake
+    - name: Build the Project
       run: cmake --build build
 
-    - name: Run tests
-      run: ctest --test-dir build
+    - name: Run Tests
+      run: ctest --test-dir build --output-on-failure
+
+  run-main:
+    name: Run Main Program
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up C++ Compiler
+      uses: actions/setup-cpp@v2
+      with:
+        compiler: gcc
+        cpp-version: 20
+
+    - name: Install CMake
+      uses: jwlawson/actions-setup-cmake@v1
+      with:
+        cmake-version: '3.16.0'
+
+    - name: Configure Build with CMake
+      run: cmake -S . -B build
+
+    - name: Build the Project
+      run: cmake --build build
+
+    - name: Run Main Program
+      run: ./build/RBTreeMain
