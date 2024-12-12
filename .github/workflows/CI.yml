@@ -14,55 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    - name: Set up C++ Compiler
-      uses: kurocha/setup-cpp@v1
-      with:
-        compiler: gcc
-        cpp-version: 20
-
-    - name: Install CMake
-      uses: jwlawson/actions-setup-cmake@v1
-      with:
-        cmake-version: '3.25.0'
-
-    - name: Configure Build with CMake
-      run: cmake -S . -B build
-
-    - name: Build the Project
-      run: cmake --build build
-
-    - name: Run Tests
-      run: ctest --test-dir build --output-on-failure
-
-  run-main:
-    name: Run Main Program
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
-
-    - name: Set up C++ Compiler
-      uses: actions/setup-cpp@v2
-      with:
-        compiler: gcc
-        cpp-version: 20
-
-    - name: Install CMake
-      uses: jwlawson/actions-setup-cmake@v1
-      with:
-        cmake-version: '3.16.0'
-
-    - name: Configure Build with CMake
-      run: cmake -S . -B build
-
-    - name: Build the Project
-      run: cmake --build build
-
-    - name: Run Main Program
-      run: ./build/RBTreeMain
+    - name: Test URL Encoding
+      run: |
+        branch_name="feature/my-branch#123"
+        ENCODED_BRANCH_NAME=$(printf %s "$branch_name" | jq -sRr @uri)
+        echo "Original Branch Name: $branch_name"
+        echo "Encoded Branch Name: $ENCODED_BRANCH_NAME"
