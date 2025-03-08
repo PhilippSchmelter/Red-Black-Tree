@@ -44,12 +44,12 @@ This project demonstrates a templated Red-Black Tree implementation in modern C+
 ## Usage
 The example in main.cpp demonstrates:
 
--Inserting key-value pairs into the Red-Black Tree.
--Performing in-order, pre-order, and post-order traversals.
--Searching for specific keys.
--Deleting nodes and validating the tree properties.
+- Inserting key-value pairs into the Red-Black Tree.
+- Performing in-order, pre-order, and post-order traversals.
+- Searching for specific keys.
+- Deleting nodes and validating the tree properties.
 
 Feel free to modify main.cpp to experiment with additional operations or to integrate the Red-Black Tree into your projects.
 
-##License
+## License
 This project is open source. MIT License
