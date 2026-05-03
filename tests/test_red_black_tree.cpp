@@ -152,7 +152,10 @@ TEST_CASE("copy assignment is exception-safe and self-assignment is a no-op") {
     b = a;
     CHECK(in_order_keys(b) == in_order_keys(a));
 
-    a = a; // self-assignment
+    // Self-assignment must be a safe no-op. Hide the literal `a = a` from
+    // -Wself-assign-overloaded by going through a reference.
+    auto& self = a;
+    a = self;
     CHECK(in_order_keys(a) == std::vector<int>{1, 2, 3, 4, 5});
 }
 
